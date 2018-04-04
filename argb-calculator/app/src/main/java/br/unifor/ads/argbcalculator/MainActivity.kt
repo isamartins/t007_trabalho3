@@ -8,8 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
-import android.widget.Toast
-import java.util.*
+
 
 class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.OnKeyListener {
 
@@ -24,6 +23,8 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
     private lateinit var mEditTextRed: EditText
     private lateinit var mEditTextGreen: EditText
     private lateinit var mEditTextBlue: EditText
+
+    private lateinit var textColor: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,8 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
         mEditTextRed = findViewById(R.id.main_edittext_red)
         mEditTextGreen = findViewById(R.id.main_edittext_green)
         mEditTextBlue = findViewById(R.id.main_edittext_blue)
+
+        textColor = findViewById(R.id.selecaoCor)
 
         configureWidgets()
 
@@ -75,6 +78,9 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
         mEditTextBlue.setText("0")
         mEditTextBlue.setOnKeyListener(this)
 
+//        textColor.setText("")
+//        textColor.setOnKeyListener(this)
+
     }
 
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -83,23 +89,28 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
 
             R.id.main_seekbar_alpha -> {
                 mEditTextAlpha.setText(seekBar.progress.toString())
+                textColor.setText(seekBar.progress.toString())
             }
 
             R.id.main_seekbar_red -> {
                 mEditTextRed.setText(seekBar.progress.toString())
+
             }
 
             R.id.main_seekbar_green -> {
                 mEditTextGreen.setText(seekBar.progress.toString())
+
             }
 
             R.id.main_seekbar_blue -> {
                 mEditTextBlue.setText(seekBar.progress.toString())
+
             }
 
         }
 
         updateColorView()
+//        updateTextColor()
 
     }
 
@@ -150,6 +161,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
         }
 
         updateColorView()
+//        updateTextColor()
 
         return false
     }
@@ -158,6 +170,10 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
         val color = Color.argb(mSeekbarAlpha.progress, mSeekbarRed.progress, mSeekbarGreen.progress, mSeekbarBlue.progress)
         mColorView.setBackgroundColor(color)
     }
-
-
+/*
+    private fun updateTextColor() {
+        val texto = textView.setText(mSeekbarAlpha.progress, mSeekbarRed.progress, mSeekbarGreen.progress, mSeekbarBlue.progress)
+        textColor.setText(texto)
+    }
+*/
 }
